@@ -1,0 +1,83 @@
+/* Raster grid subsystem (rsms.me/raster) */
+grid {
+  display: grid;
+  --grid-tc: repeat(4, 1fr);
+  grid-template-columns: var(--grid-tc);
+  --grid-cs: 1; /* column start */
+  --grid-ce: -1 /* column end */
+}
+
+/* c -- cell or column */
+grid > c { display: block; appearance: none; -webkit-appearance: none }
+
+@for $i from 1 through $grid-column-count {
+  $i-up: $i + 1;
+  $i-down: $i - 1;
+
+  grid[columns="#{$i}"] { --grid-tc: repeat(#{$i}, 1fr) }
+  grid > c[span^="#{$i}"] { --grid-cs: #{$i} }
+
+  @if ($i == 1) {
+    grid > c[span$="+#{$i}"], grid > c[span="#{$i}"] { --grid-ce: 1 }
+  } @else if($i == $grid-column-count) {
+    grid > c[span$="-#{$i}"] { --grid-ce: (#{$i-up}) }
+  } @else {
+    grid > c[span$="+#{$i}"], grid > c[span$="-#{$i-down}"], grid > c[span="#{$i}"] { --grid-ce: #{$i} }
+  }
+
+  @media only screen and (max-width: 600px) {
+    grid[columns-s="#{$i}"] { --grid-tc: repeat(#{$i}, 1fr) }
+    grid > c[span-s^="#{$i}"] { --grid-cs: #{$i} }
+
+    @if ($i == 1) {
+      grid > c[span-s$="+#{$i}"], grid > c[span-s="#{$i}"] { --grid-ce: 1 }
+    } @else if($i == $grid-column-count) {
+      grid > c[span-s$="-#{$i}"] { --grid-ce: (#{$i-up}) }
+    } @else {
+      grid > c[span-s$="+#{$i}"], grid > c[span-s$="-#{$i-down}"], grid > c[span-s="#{$i}"] { --grid-ce: #{$i} }
+    }
+  }
+
+  @media only screen and (min-width: 1599px) {
+    grid[columns-l="#{$i}"] { --grid-tc: repeat(#{$i}, 1fr) }
+    grid > c[span-l^="#{$i}"] { --grid-cs: #{$i} }
+
+    @if ($i == 1) {
+      grid > c[span-l$="+#{$i}"], grid > c[span-l="#{$i}"] { --grid-ce: 1 }
+    } @else if($i == $grid-column-count) {
+      grid > c[span-l$="-#{$i}"] { --grid-ce: (#{$i-up}) }
+    } @else {
+      grid > c[span-l$="+#{$i}"], grid > c[span-l$="-#{$i-down}"], grid > c[span-l="#{$i}"] { --grid-ce: #{$i} }
+    }
+  }
+}
+
+/* connect vars */
+grid > c[span] { grid-column-end: span var(--grid-ce) }
+grid > c[span*="+"], grid > c[span*="-"], grid > c[span*=".."] {
+  grid-column-start: var(--grid-cs) }
+grid > c[span*="-"], grid > c[span*=".."] {
+  grid-column-end: var(--grid-ce) }
+grid > c[span="row"] { grid-column: 1 / -1 }
+
+/* for window width <= 600 */
+@media only screen and (max-width: 600px) {
+  /* connect vars */
+  grid > c[span-s] { grid-column-end: span var(--grid-ce) }
+  grid > c[span-s*="+"], grid > c[span-s*="-"], grid > c[span-s*=".."] {
+    grid-column-start: var(--grid-cs) }
+  grid > c[span-s*="-"], grid > c[span-s*=".."] {
+    grid-column-end: var(--grid-ce) }
+  grid > c[span-s="row"] { grid-column: 1 / -1 }
+}
+
+/* for window width >= 1600 */
+@media only screen and (min-width: 1599px) {
+  /* connect vars */
+  grid > c[span-l] { grid-column-end: span var(--grid-ce) }
+  grid > c[span-l*="+"], grid > c[span-l*="-"], grid > c[span-l*=".."] {
+    grid-column-start: var(--grid-cs) }
+  grid > c[span-l*="-"], grid > c[span-l*=".."] {
+    grid-column-end: var(--grid-ce) }
+  grid > c[span-l="row"] { grid-column: 1 / -1 }
+}

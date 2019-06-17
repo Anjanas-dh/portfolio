@@ -1,0 +1,29 @@
+$headings: (
+        h1: $headings-h1-font-size,
+        h2: $headings-h2-font-size,
+        h3: $headings-h3-font-size,
+        h4: $headings-h4-font-size,
+        h5: $headings-h5-font-size
+);
+
+@each $name, $value in $headings {
+  #{$name}, .#{$name} {
+    font-family: $font-family-base;
+    color: $white;
+    font-size: $value;
+    line-height: $line-height;
+    font-weight: $font-weight-bold;
+    margin-bottom: $value * $headings-margin-multiply;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+p {
+  margin-bottom: map-get($spacers, 0);
+}

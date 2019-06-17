@@ -1,7 +1,8 @@
+// noinspection WebpackConfigHighlighting
 module.exports = {
     module: {
         rules: {
-            test: /\.sass$/,
+            test: /\.scss$/,
             use: [
                 'vue-style-loader',
                 'css-loader',

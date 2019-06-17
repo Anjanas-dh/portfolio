@@ -1,0 +1,35 @@
+// Spacers 8-point-grid
+$spacer: 1rem;
+$spacers: (
+        sm: $spacer / 4, // 4px
+        0: $spacer / 2, // 8px
+        1: $spacer, // 16px
+        2: $spacer * 1.5, // 24px
+        3: $spacer * 2, // 32px
+        4: $spacer * 2.5, // 40px
+        5: $spacer * 3 // 48px
+);
+// Text and typography
+$body-color: $black;
+$line-height: 1.2;
+
+$font-family-base: 'Open Sans', sans-serif;
+$font-family-headings: 'Noto Sans HK', sans-serif;
+$font-size-base-px: 16;
+$font-size-base: 16px;
+
+// Font weights
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Headings
+$headings-margin-multiply: .8;
+$headings-h1-font-size: map-get($spacers, 3);
+$headings-h2-font-size: map-get($spacers, 2) + map-get($spacers, "sm");
+$headings-h3-font-size: map-get($spacers, 2);
+$headings-h4-font-size: map-get($spacers, 1);
+$headings-h5-font-size: map-get($spacers, 0);
+
+// Grid
+$container-max-width: 800px;
+$grid-column-count: 12;

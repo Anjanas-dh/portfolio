@@ -1,0 +1,19 @@
+body, html {
+  background-color: map-get($theme-colors, "primary");
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height;
+  box-sizing: border-box;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+container {
+  max-width: $container-max-width;
+}
